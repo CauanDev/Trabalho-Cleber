@@ -25,6 +25,7 @@ class EstoqueController extends Controller
 
     public function edit($id)
     {
+        // Se usar select, ele vai retornar um array, por isso utilizo selectOne
         $estoque = DB::selectOne(
             'SELECT * FROM estoques WHERE deleted_at IS NULL AND id = :id',
             ['id' => $id]
