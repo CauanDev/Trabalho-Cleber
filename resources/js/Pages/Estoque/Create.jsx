@@ -6,9 +6,14 @@ import ProdutoForm from '../../Componentes/Forms/ProdutosForm';
 function Create() {
     const produtoFormRef = useRef();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const produtoData = produtoFormRef.current.getValues();
-        console.log("Dados do Produto:", produtoData);
+        try {
+            await window.http.post('/update-produto',produtoData);
+        } 
+        catch (error) {
+            console.log(error)
+        }
     };
 
     return (
@@ -16,12 +21,10 @@ function Create() {
             <Head title="Editar Estoque" />
             <div className="flex flex-col w-full items-center justify-center p-4">
                 <Form onSubmit={handleSubmit} className="w-full max-w-md" title="Adicionar Produto no Estoque">
-                    <div>
-                        <ProdutoForm ref={produtoFormRef} />
-                    </div>
+                    <ProdutoForm ref={produtoFormRef} />
 
                     <Button variant="primary" type="submit">
-                        Salvar Alterações
+                        Cadastrar Produto
                     </Button>
                 </Form>
             </div>

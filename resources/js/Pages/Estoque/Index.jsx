@@ -29,27 +29,28 @@ function Index({ estoques }) {
 
     return (
         <>
+            <Head title="Estoque" />
+
             <Breadcrumb>
                 {crumbs.map((crumb, index) => (
                     <Breadcrumb.Item
                         key={index}
-                        active={index === crumbs.length - 1} // Define o último item como ativo
-                    >
+                        active={index === crumbs.length - 1} >
                         {index !== crumbs.length - 1 ? (
-                            // Não ativo: utilizamos Link para navegar
                             <Link href={crumb.link}>
                                 {crumb.label}
                             </Link>
                         ) : (
-                            // Ativo: Exibimos o texto diretamente (sem Link)
                             crumb.label
                         )}
                     </Breadcrumb.Item>
                 ))}
             </Breadcrumb>
 
-            <Head title="Estoque" />
-            
+            <Link href={"/create-produto"} className="btn me-2">
+                Cadastrar Produto
+            </Link>
+
             <div className="flex flex-col w-full items-center justify-center">
                 <div className="w-[80%]">
                     <DataTable 

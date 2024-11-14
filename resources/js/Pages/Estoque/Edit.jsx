@@ -1,14 +1,19 @@
 import React, { useRef } from 'react';
 import { Head } from '@inertiajs/react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import ProdutoForm from '../../Componentes/Forms/ProdutosForm';
 
 function Edit({ produto }) {
     const produtoFormRef = useRef();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const produtoData = produtoFormRef.current.getValues();
-        console.log("Dados do Produto:", produtoData);
+        try {
+            await window.http.post('/update-produto',produtoData);
+        } 
+        catch (error) {
+            console.log(error)
+        }
     };
 
     return (

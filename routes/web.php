@@ -24,9 +24,11 @@ Route::get('/', function () {
 });
 
 Route::get('/estoque',[EstoqueController::class,'index']);
-Route::get('/edit-estoque/{id}', [EstoqueController::class, 'edit']);
-Route::delete('/remove-estoque/{id}', [EstoqueController::class, 'destroy']);
-Route::get('/create-estoque', [EstoqueController::class, 'create']);
+Route::get('/edit-produto/{id}', [EstoqueController::class, 'edit']);
+Route::delete('/remove-produto/{id}', [EstoqueController::class, 'destroy']);
+Route::post('/create-produto', [EstoqueController::class, 'create']);
+Route::post('/update-produto', [EstoqueController::class, 'update']);
+Route::post('/store-produto', [EstoqueController::class, 'store']);
 
 Route::get('/pedidos', [PedidosController::class, 'index']);
 Route::get('/menu', [MenuController::class, 'index']);

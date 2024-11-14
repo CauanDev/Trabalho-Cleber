@@ -36,6 +36,13 @@ class EstoqueController extends Controller
         ]);
     }
 
+    public function update(Request $request)
+    {
+        dd(
+            $request
+        );
+    }
+
     public function destroy($id)
     {
         DB::update('
