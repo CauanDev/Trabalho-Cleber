@@ -274,10 +274,8 @@ class PedidosController extends Controller
             ]);
             return redirect()->route('pedidos')->with('message', 'Pedido Atualizado com sucesso!');
         } catch (\Throwable $th) {
-            return redirect()->route('pedidos')->with('message', 'Erro ao Atualizar Pedido!'.$th->getMessage());
+            return redirect()->route('pedidos')->with('message', 'Erro ao Atualizar Pedido!' . $th->getMessage());
         }
-
-
     }
 
     public function addItem($produtos, $id)
@@ -355,4 +353,84 @@ class PedidosController extends Controller
             return redirect()->route('pedidos')->with('message', 'Erro ao Deletar Pedido!' . $th->getMessage());
         }
     }
+
+   public function filter(Request $request)
+{
+    $query = '
+        SELECT 
+            pedidos.id,
+            pedidos.valor,
+            pedidos.mesa_id,
+            pedidos.funcionario_id,
+            pedidos.status,
+            funcionarios.nome as nome_funcionario,
+            COUNT(pedidos_itens.id) as quantidade_item
+        FROM pedidos
+        LEFT JOIN funcionarios ON pedidos.funcionario_id = funcionarios.id
+        LEFT JOIN pedidos_itens ON pedidos.id = pedidos_itens.pedido_id
+        WHERE pedidos.deleted_at IS NULL 
+          AND pedidos_itens.deleted_at IS NULL
+    ';
+
+    $parameters = [];
+
+    if ($request->has('data_inicial') && $request->has('data_final')) {
+        $query .= ' AND pedidos.created_at BETWEEN ? AND ?';
+        $parameters[] = $request->input('data_inicial');
+        $parameters[] = $request->input('data_final');
+    }
+
+    // if ($request->has('ordenacao_valor')) {
+    //     $ordenacao = $request->input('ordenacao_valor') == 'asc' ? 'ASC' : 'DESC';
+    //     $query .= ' ORDER BY pedidos.valor ' . $ordenacao;
+    // }
+
+    $query .= ' GROUP BY pedidos.id, pedidos.valor, pedidos.mesa_id, pedidos.funcionario_id, funcionarios.nome';
+
+    if ($request->has('mais_atendeu')) {
+        $query = '
+            SELECT 
+                funcionarios.nome as nome_funcionario, 
+                COUNT(pedidos.id) as total_atendimentos
+            FROM pedidos
+            LEFT JOIN funcionarios ON pedidos.funcionario_id = funcionarios.id
+            WHERE pedidos.deleted_at IS NULL
+            GROUP BY funcionarios.nome
+            ORDER BY total_atendimentos DESC
+            LIMIT 1
+        ';
+        $parameters = []; 
+    }
+    if ($request->has('ordenacao_valor')) {
+        $ordenacao = $request->input('ordenacao_valor') == 'asc' ? 'ASC' : 'DESC';
+        $query .= ' ORDER BY pedidos.valor ' . $ordenacao;
+    } else {
+        $query .= ' ORDER BY pedidos.created_at DESC';
+    }
+
+
+    if ($request->has('mais_mesa')) {
+        $query = '
+            SELECT 
+                pedidos.mesa_id,
+                COUNT(pedidos.id) as total_pessoas
+            FROM pedidos
+            LEFT JOIN pedidos_itens ON pedidos.id = pedidos_itens.pedido_id
+            WHERE pedidos.deleted_at IS NULL
+            GROUP BY pedidos.mesa_id
+            ORDER BY total_pessoas DESC
+            LIMIT 1
+        ';
+        $parameters = []; 
+    }
+
+    $pedidos = DB::select($query, $parameters);
+
+    return response()->json([
+        'pedidos' => $pedidos
+    ]);
+}
+
+    
+    
 }
