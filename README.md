@@ -59,8 +59,9 @@ Siga os passos abaixo para configurar o projeto no seu ambiente local:
 7. **Executando o Projeto**
    Dentro da pasta do projeto, rode os seguintes comando:
    ```bash
+   npm run build
    php artisan serve
-   npm run dev
    ```
-
+8. **Acesse o Sistema**
+    Após executar os dois comandos, abra o servidor de desenvolvimento do Laravel para acessar a aplicação.
 
