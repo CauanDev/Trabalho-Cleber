@@ -25,5 +25,42 @@ Siga os passos abaixo para configurar o projeto no seu ambiente local:
    Primeiramente, clone o repositório para o seu diretório local:
 
    ```bash
-   git clone [https://github.com/seu-usuario/repositorio.git](https://github.com/CauanDev/Trabalho-Cleber.git)
+   git clone https://github.com/CauanDev/Trabalho-Cleber.git
    cd Trabalho-Cleber
+   ```
+2. **Instale as dependências PHP**
+   ```bash
+     composer install
+   ```
+3. **Instale as dependências JavaScript**
+   ```bash
+    npm install
+   ```
+4. **Configuração do ambiente**
+    ```bash
+    cp .env.example .env (Ou copie o arquivo .env.example e renomeie para .env somente)
+    ```
+5. **Configuração do Banco de Dados**
+
+   Dentro do arquivo .env, configure corretamente o banco de dados, preenchendo as variáveis de conexão conforme necessário:
+   ```bash
+    DB_CONNECTION=pgsql
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_DATABASE=laravel
+    DB_USERNAME=root
+    DB_PASSWORD=
+   ```
+6. **Rodando as Migrations**
+   Dentro da pasta do projeto, rode o seguinte comando:
+   ```bash
+   php artisan migrate
+   ```
+7. **Executando o Projeto**
+   Dentro da pasta do projeto, rode os seguintes comando:
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
+
+
