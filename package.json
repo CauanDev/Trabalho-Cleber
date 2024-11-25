@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.20",
+        "axios": "^1.7.7",
+        "laravel-vite-plugin": "^1.0.0",
+        "postcss": "^8.4.47",
+        "tailwindcss": "^3.4.14",
+        "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.13.5",
+        "@emotion/styled": "^11.13.5",
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/progress": "^0.1.2",
+        "@inertiajs/react": "^1.2.0",
+        "@mui/material": "^6.1.8",
+        "@mui/styled-engine-sc": "^6.1.8",
+        "@vitejs/plugin-react": "^4.3.3",
+        "bootstrap": "^5.3.3",
+        "next-themes": "^0.3.0",
+        "react": "^18.3.1",
+        "react-bootstrap": "^2.10.5",
+        "react-dom": "^18.3.1",
+        "react-icons": "^5.3.0",
+        "styled-components": "^6.1.13"
+    }
+}
