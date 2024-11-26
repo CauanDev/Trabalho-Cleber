@@ -56,12 +56,18 @@ Siga os passos abaixo para configurar o projeto no seu ambiente local:
    ```bash
    php artisan migrate
    ```
-7. **Executando o Projeto**
+
+8. **Criação de Chave de API**
+    Para garantir qualquer erro por causa da criação da api, é recomendável dar o seguinte comando dentro da pasta do projeto:
+    ```bash
+    php artisan key:generate
+    ```
+9. **Executando o Projeto**
    Dentro da pasta do projeto, rode os seguintes comando:
    ```bash
    npm run build
    php artisan serve
    ```
-8. **Acesse o Sistema**
+10. **Acesse o Sistema**
     Após executar os dois comandos, abra o servidor de desenvolvimento do Laravel para acessar a aplicação.
 
