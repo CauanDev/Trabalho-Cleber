@@ -380,11 +380,6 @@ class PedidosController extends Controller
         $parameters[] = $request->input('data_final');
     }
 
-    // if ($request->has('ordenacao_valor')) {
-    //     $ordenacao = $request->input('ordenacao_valor') == 'asc' ? 'ASC' : 'DESC';
-    //     $query .= ' ORDER BY pedidos.valor ' . $ordenacao;
-    // }
-
     $query .= ' GROUP BY pedidos.id, pedidos.valor, pedidos.mesa_id, pedidos.funcionario_id, funcionarios.nome';
 
     if ($request->has('mais_atendeu')) {
