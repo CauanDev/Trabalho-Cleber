@@ -70,4 +70,5 @@ Siga os passos abaixo para configurar o projeto no seu ambiente local:
    ```
 10. **Acesse o Sistema**
     Após executar os dois comandos, abra o servidor de desenvolvimento do Laravel para acessar a aplicação.
+    Utilize a rota: "/estoque" para ter acesso inicial.
 
